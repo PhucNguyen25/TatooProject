@@ -565,3 +565,46 @@ void ssd1306_SetDisplayOn(const uint8_t on) {
 uint8_t ssd1306_GetDisplayOn() {
     return SSD1306.DisplayOn;
 }
+
+
+// For W064048
+
+/*********************************************************************************
+Function name: initW064048
+Description: Initialization of the display
+*********************************************************************************/
+void initW064048(void){
+    // PORT5.PODR.BIT.B4 = 0; //D/C# pin low
+    // PORT5.PODR.BIT.B5 = 0; //reset pin low
+    // ms_delay(100); //100ms delay
+    // PORT5.PODR.BIT.B5 = 1; //reset pin high
+    // ms_delay(100); //100ms delay
+    ssd1306_WriteCommand(0xA8); //set multiplex ratio...
+    ssd1306_WriteCommand(0x2F); //...to 48‐1
+    ssd1306_WriteCommand(0x8D); //charge pump setting...
+    ssd1306_WriteCommand(0x14); //...Enable charge pump
+    ssd1306_WriteCommand(0xAD); //set internal Iref setting
+    ssd1306_WriteCommand(0x30);
+    ssd1306_WriteCommand(0x81); //set contrast...
+    ssd1306_WriteCommand(0x35); //...to 0x35 (long life time)
+    //...to 0x7F (for higher brightness)
+    ssd1306_WriteCommand(0xAF); //set display on
+    ssd1306_WriteCommand(0xC8); //set COM output direction (remap)
+    ssd1306_WriteCommand(0xA1); //set segment remap (col. 127 to SEG0)
+}
+
+/*********************************************************************************
+Function name: initWindow
+Description: Initialization of the window in horizontal addressing mode
+*********************************************************************************/
+void initWindow(uint8_t startcol, uint8_t stopcol, uint8_t startpage, uint8_t stoppage){
+    ssd1306_WriteCommand(0x20); //set memory addressing mode ...
+    ssd1306_WriteCommand(0x00); //... to horizontal addressing mode
+    ssd1306_WriteCommand(0x21); //set column address
+    ssd1306_WriteCommand(32+startcol); //start column
+    ssd1306_WriteCommand(32+stopcol); //stop column
+    ssd1306_WriteCommand(0x22); //set page address
+    ssd1306_WriteCommand(startpage); //start page
+    ssd1306_WriteCommand(stoppage); //stop page
+}
+

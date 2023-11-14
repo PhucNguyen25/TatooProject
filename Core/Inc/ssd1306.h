@@ -186,6 +186,20 @@ void ssd1306_WriteCommand(uint8_t byte);
 void ssd1306_WriteData(uint8_t* buffer, size_t buff_size);
 SSD1306_Error_t ssd1306_FillBuffer(uint8_t* buf, uint32_t len);
 
+
+// For W064048
+/*********************************************************************************
+Function name: initW064048
+Description: Initialization of the display
+*********************************************************************************/
+void initW064048(void);
+
+/*********************************************************************************
+Function name: initWindow
+Description: Initialization of the window in horizontal addressing mode
+*********************************************************************************/
+void initWindow(uint8_t startcol, uint8_t stopcol, uint8_t startpage, uint8_t stoppage);
+
 //_END_STD_C
 
 #endif // __SSD1306_H__

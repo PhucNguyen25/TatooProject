@@ -7,8 +7,8 @@
 #define __SSD1306_CONF_H__
 
 // Choose a microcontroller family
-// #define STM32F0
-#define STM32F1
+#define STM32F0
+// #define STM32F1
 //#define STM32F4
 //#define STM32L0
 //#define STM32L1
@@ -52,7 +52,7 @@
 
 // The width of the screen can be set using this
 // define. The default value is 128.
-#define SSD1306_WIDTH           128
+#define SSD1306_WIDTH           64
 
 // If your screen horizontal axis does not start
 // in column 0 you can use this define to
